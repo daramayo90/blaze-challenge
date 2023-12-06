@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+model Match {
+  id                   Int    @id @default(autoincrement())
+  country_name         String @db.VarChar
+  league_name          String @db.VarChar
+  match_date           String @db.VarChar
+  match_hometeam_id    String @db.VarChar
+  match_hometeam_name  String @db.VarChar
+  match_hometeam_score String @db.VarChar
+  match_awayteam_id    String @db.VarChar
+  match_awayteam_name  String @db.VarChar
+  match_awayteam_score String @db.VarChar
+  match_stadium        String @db.VarChar
+  match_referee        String @db.VarChar
+  team_home_badge      String @db.VarChar
+  team_away_badge      String @db.VarChar
+  league_logo          String @db.VarChar
+}
+
+model Team {
+  id           Int      @id @default(autoincrement())
+  team_key     String   
+  team_name    String
+  team_country String
+  team_badge   String
+  players      Player[]
+}
+
+model Player {
+  id                  Int    @id @default(autoincrement())
+  player_name         String @db.VarChar
+  player_number       String @db.VarChar
+  player_type         String @db.VarChar
+  player_age          String @db.VarChar
+  player_match_played String @db.VarChar
+  player_goals        String @db.VarChar
+  player_assists      String @db.VarChar
+  player_birthdate    String @db.VarChar
+  team                Team   @relation(fields: [teamId], references: [id])
+  teamId              Int
+}
