@@ -13,5 +13,9 @@ Create a frontend component to interact with and display this data.
    ```
    docker compose up -d
    ```
-4. Check the env to obtain db credentials
-5. Run `npm run dev`
+4. Run a migration to create the database tables using Prisma
+   ```
+   npx prisma migrate dev --name init
+   ```
+5. Check the env to obtain db credentials
+6. Run `npm run dev`
