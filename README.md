@@ -15,9 +15,9 @@ As part of this project's scope, the `teamId` is currently hard-coded in the `cl
 
 To enhance the application's functionality and user experience, the following features are proposed for future development:
 
-1. _Dynamic Team Selection:_ Integrate a dropdown list in the user interface, allowing users to select different teams dynamically. This feature would replace the current hard-coded teamId, enabling users to explore data for various teams.
-2. _Date Filtering:_ Implement a date filter feature to allow users to specify a date range. This addition would enable the application to display match and player data relevant to the selected timeframe, offering a more tailored and interactive experience.
-3. _Scalability Considerations:_ The proposed enhancements are designed with scalability in mind. They aim to transform the application from a static demonstration into an interactive platform, catering to a broader range of user queries and improving overall engagement.
+1. **Dynamic Team Selection:** Integrate a dropdown list in the user interface, allowing users to select different teams dynamically. This feature would replace the current hard-coded teamId, enabling users to explore data for various teams.
+2. **Date Filtering:** Implement a date filter feature to allow users to specify a date range. This addition would enable the application to display match and player data relevant to the selected timeframe, offering a more tailored and interactive experience.
+3. **Scalability Considerations:** The proposed enhancements are designed with scalability in mind. They aim to transform the application from a static demonstration into an interactive platform, catering to a broader range of user queries and improving overall engagement.
 
 By implementing these features, the application will not only provide more flexibility in data presentation but also enhance its capability to serve diverse user needs.
 
