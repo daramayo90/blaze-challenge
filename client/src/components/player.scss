@@ -1,0 +1,23 @@
+.player-item {
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+   width: 100%;
+   padding: 10px 0;
+   border-bottom: 1px solid rgb(90, 90, 90);
+
+   &__number,
+   &__name,
+   &__position,
+   &__age {
+      width: 20%;
+      text-align: left;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: rgb(230, 230, 230);
+   }
+
+   &__number {
+      width: 30px;
+   }
+}

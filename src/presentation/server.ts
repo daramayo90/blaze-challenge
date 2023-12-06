@@ -1,5 +1,6 @@
 import express, { Router } from 'express';
 import path from 'path';
+import cors from 'cors';
 import compression from 'compression';
 
 import { CronService } from './cron/cron-service';
@@ -38,21 +39,21 @@ export class Server {
       this.app.use(express.json()); // raw
       this.app.use(express.urlencoded({ extended: true })); // x-www-form-urlencoded
       this.app.use(compression());
+      this.app.use(cors());
 
       // Public Folder
-      this.app.use(express.static(this.publicPath));
+      this.app.use(express.static(path.join(__dirname, '../client/public')));
 
       // Routes
       this.app.use(this.routes);
 
-      // SPA
+      // SPA - React App
       this.app.get('*', (req, res) => {
-         const indexPath = path.join(__dirname + `../../../${this.publicPath}/index.html`);
-         res.sendFile(indexPath);
+         res.sendFile(path.join(__dirname, '../client/public', 'index.html'));
       });
 
       // Cron Players
-      CronService.createJob('*/10 * * * * *', () => {
+      CronService.createJob('*/15 * * * * *', () => {
          new FetchTeamService(
             playerRepository,
             () => console.log(`Fetched Team/Players and Stored ok`),
@@ -61,7 +62,7 @@ export class Server {
       });
 
       // Cron Matches
-      CronService.createJob('*/10 * * * * *', () => {
+      CronService.createJob('*/15 * * * * *', () => {
          new FetchMatchService(
             matchRepository,
             () => console.log(`Fetched Matches and Stored ok`),

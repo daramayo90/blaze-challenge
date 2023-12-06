@@ -1,0 +1,74 @@
+.match-item {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-evenly;
+   padding: 10px;
+
+   &__date {
+      width: 100%;
+      text-align: left;
+      font-size: 1rem;
+      font-weight: 600;
+      color: rgb(230, 230, 230);
+   }
+
+   &__versus {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 100%;
+      margin: 10px 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: rgb(230, 230, 230);
+
+      &__team {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         width: 40%;
+         height: 100%;
+         padding: 10px;
+         border-radius: 5px;
+
+         &__badge {
+            width: 40%;
+
+            img {
+               width: 100%;
+               object-fit: contain;
+            }
+         }
+
+         &__name {
+            margin-top: 10px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: rgb(230, 230, 230);
+         }
+
+         &__score {
+            width: 70%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: rgb(230, 230, 230);
+         }
+      }
+   }
+
+   &__referee,
+   &__league,
+   &__stadium {
+      width: 100%;
+      margin: 5px 0;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 400;
+      color: rgb(200, 200, 200);
+   }
+}

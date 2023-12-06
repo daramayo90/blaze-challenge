@@ -9,8 +9,6 @@ export const fetchMatches = async (teamId?: string): Promise<MatchEntity[]> => {
       ? `${envs.APIFOOTBAL_URL}/?action=get_events&${filterDate}&team_id=${teamId}&APIkey=${envs.APIFOOTBAL_KEY}`
       : `${envs.APIFOOTBAL_URL}/?action=get_events&${filterDate}&APIkey=${envs.APIFOOTBAL_KEY}`;
 
-   console.log(url);
-
    try {
       return await httpClient.get(url);
    } catch (error) {
