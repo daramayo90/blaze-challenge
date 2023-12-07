@@ -14,7 +14,7 @@ export class PlayerDto {
       public readonly teamId: number,
    ) {}
 
-   static fromApiData(data: PlayerEntity): PlayerDto {
+   static fromApiData(data: PlayerEntity, teamId: number): PlayerDto {
       return new PlayerDto(
          data.id,
          data.player_name,
@@ -25,7 +25,7 @@ export class PlayerDto {
          data.player_goals,
          data.player_assists,
          data.player_birthdate,
-         data.teamId,
+         teamId,
       );
    }
 }

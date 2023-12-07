@@ -30,14 +30,10 @@ By implementing these features, the application will not only provide more flexi
    ```
    docker compose up -d
    ```
-5. Run a migration to create the database tables using Prisma
-   ```
-   npx prisma migrate dev --name init
-   ```
-6. Check the env to obtain db credentials
-7. Run `npm run dev`
-8. Go to the client directory to initiate the React app `cd client`
-9. Run `npm start`
+5. Check the env to obtain db credentials
+6. Run `npm run dev`
+7. Go to the client directory to initiate the React app `cd client`
+8. Run `npm start`
 
 ## Technology Stack
 

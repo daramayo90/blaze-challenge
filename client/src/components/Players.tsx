@@ -33,6 +33,8 @@ const Players: FC<Props> = ({ teamId }) => {
 
    if (loading) return <p>Loading...</p>;
 
+   // console.log(players);
+
    return (
       <div className='players'>
          <h2 className='players__lineup'>Line-up</h2>
@@ -42,8 +44,8 @@ const Players: FC<Props> = ({ teamId }) => {
                <span className='players__list__error'>Error: {error}</span>
             ) : (
                <>
-                  {players.map((player: IPlayer) => (
-                     <Player key={player.id} player={player} />
+                  {players.map((player: IPlayer, key) => (
+                     <Player key={key} player={player} />
                   ))}
                </>
             )}

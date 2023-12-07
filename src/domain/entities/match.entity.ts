@@ -16,4 +16,24 @@ export class MatchEntity {
       public readonly team_away_badge: string,
       public readonly league_logo: string,
    ) {}
+
+   static fromRawData(data: any): MatchEntity {
+      return new MatchEntity(
+         data.id,
+         data.country_name,
+         data.league_name,
+         data.match_date,
+         data.match_hometeam_id,
+         data.match_hometeam_name,
+         data.match_hometeam_score,
+         data.match_awayteam_id,
+         data.match_awayteam_name,
+         data.match_awayteam_score,
+         data.match_stadium,
+         data.match_referee,
+         data.team_home_badge,
+         data.team_away_badge,
+         data.league_logo,
+      );
+   }
 }

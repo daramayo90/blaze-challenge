@@ -19,7 +19,6 @@ const Matches: FC<Props> = ({ teamId }) => {
       const fetchData = async () => {
          try {
             const data = await getMatchesByTeam(teamId);
-            console.log(data);
             setMatches(data);
             setError(null);
          } catch (err: any) {

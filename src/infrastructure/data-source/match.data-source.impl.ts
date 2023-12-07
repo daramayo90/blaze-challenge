@@ -3,48 +3,65 @@ import { prisma } from '../../data/postgres';
 import { MatchDataSource } from '../../domain/data-sources/match.data-source';
 import { MatchDto } from '../../domain/dtos/create-match.dto';
 import { MatchEntity } from '../../domain/entities/match.entity';
+import { sqlMatches } from '../../sql';
+import pool from '../../data/pg-pool';
 
 export class MatchDataSourceImpl implements MatchDataSource {
    async getMatchesByTeam(teamId: string): Promise<MatchEntity[]> {
       if (!teamId) throw `Team with id ${teamId} not found`;
 
-      const matches = await this.getAllMatches(teamId);
+      const client = await pool.connect();
 
-      if (matches.length === 0) {
-         const fetchedMatches = await fetchMatches(teamId);
+      try {
+         const matches = await this.getAllMatches(client, teamId);
 
-         if ('error' in fetchedMatches) {
-            throw 'No match found';
+         if (matches.length === 0) {
+            const fetchedMatches = await fetchMatches(teamId);
+
+            if ('error' in fetchedMatches) {
+               throw 'No match found';
+            }
+
+            return await this.storeFetchedMatches(client, fetchedMatches);
          }
 
-         return await this.storeFetchedMatches(fetchedMatches);
+         return matches;
+      } finally {
+         client.release();
       }
-
-      return matches;
    }
 
-   private async getAllMatches(teamId: string): Promise<MatchEntity[]> {
+   private async getAllMatches(client: any, teamId: string): Promise<MatchEntity[]> {
       try {
-         return await prisma.match.findMany({
-            where: {
-               OR: [{ match_hometeam_id: teamId }, { match_awayteam_id: teamId }],
-            },
-         });
+         // return await prisma.match.findMany({
+         //    where: { OR: [{ match_hometeam_id: teamId }, { match_awayteam_id: teamId }] },
+         // });
+         return sqlMatches.getMatchesQuery(client, teamId);
       } catch (error) {
          console.error(error);
          throw 'Database operation failed';
       }
    }
 
-   private async storeFetchedMatches(matchesData: MatchEntity[]): Promise<MatchEntity[]> {
-      const dbMatches = matchesData.map((matchData) => {
-         return prisma.match.create({ data: MatchDto.fromApiData(matchData) });
-      });
+   private async storeFetchedMatches(client: any, matchesData: MatchEntity[]): Promise<MatchEntity[]> {
+      await client.query('BEGIN');
 
       try {
-         return await Promise.all(dbMatches);
+         // const dbMatches = matchesData.map((matchData) => {
+         //    return prisma.match.create({ data: MatchDto.fromApiData(matchData) });
+         // });
+
+         // return await Promise.all(dbMatches);
+         for (const matchData of matchesData) {
+            const matchDto = MatchDto.fromApiData(matchData);
+            await sqlMatches.insertMatchQuery(client, matchDto);
+         }
+
+         await client.query('COMMIT');
+         return matchesData.map((matchData) => MatchEntity.fromRawData(matchData));
       } catch (error) {
-         console.error('Error storing matches:', error);
+         await client.query('ROLLBACK');
+         console.error('Error storing matches.', error);
          throw new Error('Database operation failed');
       }
    }
