@@ -39,8 +39,8 @@ const Matches: FC<Props> = ({ teamId }) => {
                <span className='matches__list__error'>Error: {error}</span>
             ) : (
                <>
-                  {matches.map((event: IMatch) => (
-                     <Match key={event.id} event={event} />
+                  {matches.map((event: IMatch, key) => (
+                     <Match key={key} event={event} />
                   ))}
                </>
             )}

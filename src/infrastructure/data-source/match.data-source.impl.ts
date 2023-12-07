@@ -4,7 +4,7 @@ import { MatchDataSource } from '../../domain/data-sources/match.data-source';
 import { MatchDto } from '../../domain/dtos/create-match.dto';
 import { MatchEntity } from '../../domain/entities/match.entity';
 import { sqlMatches } from '../../sql';
-import pool from '../../data/pg-pool';
+import pool from '../../data/pg';
 
 export class MatchDataSourceImpl implements MatchDataSource {
    async getMatchesByTeam(teamId: string): Promise<MatchEntity[]> {

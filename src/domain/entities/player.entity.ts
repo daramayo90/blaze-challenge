@@ -9,7 +9,7 @@ export class PlayerEntity {
       public readonly player_goals: string,
       public readonly player_assists: string,
       public readonly player_birthdate: string,
-      public readonly teamId: number,
+      public readonly team_id: number,
    ) {}
 
    static fromRawData(data: any): PlayerEntity {
@@ -23,7 +23,7 @@ export class PlayerEntity {
          data.player_goals,
          data.player_assists,
          data.player_birthdate,
-         data.teamId,
+         data.team_id,
       );
    }
 }

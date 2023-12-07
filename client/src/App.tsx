@@ -4,7 +4,7 @@ import Players from './components/Players';
 import './App.scss';
 
 const App = () => {
-   const teamId = '152'; // 76, 79, 130, 152
+   const teamId = '76'; // 76, 79, 130, 152
 
    return (
       <div className='app'>

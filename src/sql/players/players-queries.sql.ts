@@ -12,14 +12,14 @@ export const isTeamQuery = async (client: any, teamData: TeamEntity): Promise<bo
    return result.rows.length > 0;
 };
 
-export const getPlayersQuery = async (client: any, teamId: string): Promise<PlayerEntity[]> => {
+export const getPlayersQuery = async (client: any, team_id: string): Promise<PlayerEntity[]> => {
    const query = `
       SELECT "Player".* FROM "Player" 
-      INNER JOIN "Team" ON "Player"."teamId" = "Team"."id" 
+      INNER JOIN "Team" ON "Player"."team_id" = "Team"."id" 
       WHERE "Team"."team_key" = $1;
     `;
 
-   const result = await client.query(query, [teamId]);
+   const result = await client.query(query, [team_id]);
    return result.rows;
 };
 
@@ -40,7 +40,7 @@ export const insertTeamQuery = async (client: any, teamDto: TeamDto): Promise<nu
 export const insertPlayerQuery = async (client: any, playerDto: PlayerDto): Promise<void> => {
    const query = `
       INSERT INTO "Player" 
-      (player_name, player_number, player_type, player_age, player_match_played, player_goals, player_assists, player_birthdate, "teamId") 
+      (player_name, player_number, player_type, player_age, player_match_played, player_goals, player_assists, player_birthdate, "team_id") 
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
       `;
 
@@ -53,7 +53,7 @@ export const insertPlayerQuery = async (client: any, playerDto: PlayerDto): Prom
       playerDto.player_goals,
       playerDto.player_assists,
       playerDto.player_birthdate,
-      playerDto.teamId,
+      playerDto.team_id,
    ];
 
    await client.query(query, values);
