@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { IPlayer } from '../interfaces/players';
+import { IPlayer } from '../interfaces';
 
 import './player.scss';
 

@@ -1,6 +1,6 @@
 import { useState, useEffect, FC } from 'react';
 import { getPlayersByTeam } from '../api/teamApi';
-import { IPlayer } from '../interfaces/players';
+import { IPlayer } from '../interfaces';
 import { Player } from './Player';
 
 import './players.scss';

@@ -1,5 +1,4 @@
 import { FC } from 'react';
-
 import { IMatch } from '../interfaces';
 
 import './match.scss';
