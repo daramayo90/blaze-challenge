@@ -52,23 +52,23 @@ export class Server {
          res.sendFile(path.join(__dirname, '../client/public', 'index.html'));
       });
 
-      // // Cron Players
-      // CronService.createJob('*/15 * * * * *', () => {
-      //    new FetchTeamService(
-      //       playerRepository,
-      //       () => console.log(`Fetched Team/Players and Stored ok`),
-      //       (error: string) => console.log(error),
-      //    ).execute('152');
-      // });
+      // Cron Players
+      CronService.createJob('*/15 * * * * *', () => {
+         new FetchTeamService(
+            playerRepository,
+            () => console.log(`Fetched Team/Players and Stored ok`),
+            (error: string) => console.log(error),
+         ).execute('152');
+      });
 
-      // // Cron Matches
-      // CronService.createJob('*/15 * * * * *', () => {
-      //    new FetchMatchService(
-      //       matchRepository,
-      //       () => console.log(`Fetched Matches and Stored ok`),
-      //       (error: string) => console.log(error),
-      //    ).execute('152');
-      // });
+      // Cron Matches
+      CronService.createJob('*/15 * * * * *', () => {
+         new FetchMatchService(
+            matchRepository,
+            () => console.log(`Fetched Matches and Stored ok`),
+            (error: string) => console.log(error),
+         ).execute('152');
+      });
 
       this.app.listen(this.port, () => {
          console.log(`Server running on port ${this.port}`);
