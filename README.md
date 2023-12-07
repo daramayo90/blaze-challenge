@@ -33,7 +33,8 @@ By implementing these features, the application will not only provide more flexi
 5. Create tables by running `npm run setup-db`
 6. Run `npm run dev`
 7. Go to the client directory to initiate the React app `cd client`
-8. Run `npm start`
+8. Run `npm install`
+9. Run `npm start`
 
 ## Technology Stack
 
